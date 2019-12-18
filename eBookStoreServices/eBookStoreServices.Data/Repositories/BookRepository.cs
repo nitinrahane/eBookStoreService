@@ -47,7 +47,7 @@ namespace eBookStoreServices.Data.Repositories
                         title = bookDetails.Title,
                         author = bookDetails.Author,
                         description = bookDetails.Description,
-                        publisher = bookDetails.PublishedYear,
+                        publisher = bookDetails.Publisher,
                         publishedYear = bookDetails.PublishedYear,
                         price = bookDetails.Price
                     });
@@ -145,7 +145,7 @@ namespace eBookStoreServices.Data.Repositories
                         title = bookDetails.Title,
                         author = bookDetails.Author,
                         description = bookDetails.Description,
-                        publisher = bookDetails.PublishedYear,
+                        publisher = bookDetails.Publisher,
                         publishedYear = bookDetails.PublishedYear,
                         price = bookDetails.Price
                     });

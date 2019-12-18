@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
 using eBookStoreServices.Controllers;
+using eBookStoreServices.Data.Interfaces;
 using eBookStoreServices.Data.Repositories;
 using eBookStoreServices.Entities.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace eBookStoreServices.UnitTest
 {
@@ -39,6 +41,57 @@ namespace eBookStoreServices.UnitTest
 
             //Assert
             Assert.AreEqual(1, resultBook.Content.ID);            
+        }
+
+        [TestMethod]
+        public void PostBook_ShouldReturnBook()
+        {
+            //Arrange
+            var booksController = new BooksController(new BookRepository());
+
+            //Act
+            IHttpActionResult result = booksController.Post(new Book()
+            {
+                Title = "Testing 1",
+                Author = "Testing",
+                Description = "Testing",
+                PublishedYear = 2020,
+                Price = 212,
+                Publisher = "Testing"
+            });
+            var resultBook = result as OkNegotiatedContentResult<Book>;
+
+            //Assert
+            Assert.AreEqual(212, resultBook.Content.Price);
+
+            //Arrange
+            //var mockRepositoryClass = new Mock<IBookRepository>();
+            //mockRepositoryClass.Setup(x => x.AddNewBook(new Book()
+            //{
+            //    Title = "Testing 1",
+            //    Author = "Testing",
+            //    Description = "Testing",
+            //    PublishedYear = 2020,
+            //    Price = 212,
+            //    Publisher = "Testing"
+            //})).Returns(true); 
+
+
+            //var booksController = new BooksController(mockRepositoryClass.Object);
+
+            //var result = booksController.Post(new Book()
+            //{
+            //    Title = "Testing 1",
+            //    Author = "Testing",
+            //    Description = "Testing",
+            //    PublishedYear = 2020,
+            //    Price = 212,
+            //    Publisher = "Testing"
+            //});
+            //var resultBookItem = result as NegotiatedContentResult<Book>;
+            //Assert.IsNotNull(resultBookItem);
+            //Assert.AreEqual(3, resultBookItem.Content.ID);
+
         }
     }
 }
