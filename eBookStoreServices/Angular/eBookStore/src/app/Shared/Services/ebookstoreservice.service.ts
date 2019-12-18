@@ -14,6 +14,10 @@ export class EbookstoreserviceService {
     return this.httpClient.get(this.baseUrl + 'books');
   }
 
+  addBook(bookDetails) {
+    return this.httpClient.post(this.baseUrl + 'books', bookDetails);
+  }
+
   get_CartDetails() {
     return this.httpClient.get(this.baseUrl + 'cart/1');
   }
@@ -35,4 +39,6 @@ export class EbookstoreserviceService {
   get_OrderHistory(userID) {
     return this.httpClient.get(this.baseUrl + 'order/' + + userID);
   }
+
+
 }
