@@ -100,6 +100,10 @@
       <Project>{7e255ccc-4c98-4a42-a836-ceefeafbf8f5}</Project>
       <Name>eBookStoreServices.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\eBookStoreServices.Services\eBookStoreServices.Services.csproj">
+      <Project>{AD5BC7F7-6550-4A34-A4FF-02766F112930}</Project>
+      <Name>eBookStoreServices.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\eBookStoreServices\eBookStoreServices.csproj">
       <Project>{f77d014e-fb84-4c65-8f4e-dc59be4344ad}</Project>
       <Name>eBookStoreServices</Name>

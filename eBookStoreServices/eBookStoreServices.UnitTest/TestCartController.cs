@@ -1,6 +1,6 @@
 ﻿using eBookStoreServices.Controllers;
-using eBookStoreServices.Data.Interfaces;
 using eBookStoreServices.Entities.Models;
+using eBookStoreServices.Services.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
@@ -21,16 +21,16 @@ namespace eBookStoreServices.UnitTest
         {
             //MOQ testing
             //Arrange
-            var mockRepositoryClass = new Mock<ICartRepository>();
+            var mockRepositoryClass = new Mock<ICartService>();
 
-            mockRepositoryClass.Setup(x => x.GetCartItems(1)).Returns(new List<Entities.Models.CartItemDetails>() {
+            mockRepositoryClass.Setup(x => x.GetCartItems("xyz")).Returns(new List<Entities.Models.CartItemDetails>() {
                 new Entities.Models.CartItemDetails() { ID = 1 }
             });
 
             var cartController = new CartController(mockRepositoryClass.Object);
 
             //Act
-            var result = cartController.Get(1).First();
+            var result = cartController.Get().First();
             
             //Assert
             Assert.AreEqual(1, result.ID);

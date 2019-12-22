@@ -9,6 +9,7 @@ using eBookStoreServices.Controllers;
 using eBookStoreServices.Data.Interfaces;
 using eBookStoreServices.Data.Repositories;
 using eBookStoreServices.Entities.Models;
+using eBookStoreServices.Services.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -21,19 +22,18 @@ namespace eBookStoreServices.UnitTest
         public void GetAllBooks_ShouldReturnAllBooks()
         {
             //Arrange
-
-            var booksController = new BooksController(new BookRepository());
+            var booksController = new BooksController(new BookService(new BookRepository()));
             //Act
             var result = booksController.Get();
             //Assert
-            Assert.IsTrue(result.Count() > 0, "The books are presents");            
+            Assert.IsTrue(result.Count() > 0, "The books are present.");            
         }
 
         [TestMethod]
         public void GetBooks_ShouldReturnBook()
         {
             //Arrange
-            var booksController = new BooksController(new BookRepository());
+            var booksController = new BooksController(new BookService(new BookRepository()));
 
             //Act
             IHttpActionResult result = booksController.Get(1);
@@ -47,7 +47,7 @@ namespace eBookStoreServices.UnitTest
         public void PostBook_ShouldReturnBook()
         {
             //Arrange
-            var booksController = new BooksController(new BookRepository());
+            var booksController = new BooksController(new BookService(new BookRepository()));
 
             //Act
             IHttpActionResult result = booksController.Post(new Book()

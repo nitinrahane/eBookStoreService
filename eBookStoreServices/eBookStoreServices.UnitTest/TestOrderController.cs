@@ -1,6 +1,7 @@
 ﻿using eBookStoreServices.Controllers;
 using eBookStoreServices.Data.Interfaces;
 using eBookStoreServices.Data.Repositories;
+using eBookStoreServices.Services.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
@@ -17,14 +18,14 @@ namespace eBookStoreServices.UnitTest
     public class TestOrderController
     {
         [TestMethod]
-        public void GetOrders_SouldReturnOrders()
+        public void GetOrders_ShouldReturnOrders()
         { //Arrange
 
-            var orderController = new OrderController(new OrderRepository(), new CartRepository());
+            var orderController = new OrderController(new OrderService(new OrderRepository()), new CartService(new CartRepository()));
             //Act
-            var result = orderController.Get(1);
+            var result = orderController.Get();
             //Assert
-            Assert.IsTrue(result.Count() > 0, "The books are presents");
+            Assert.IsTrue(result.Count() > 0, "books are presents");
 
         }
     }

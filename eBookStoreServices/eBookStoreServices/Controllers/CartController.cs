@@ -1,34 +1,42 @@
-﻿using eBookStoreServices.Data.Interfaces;
-using eBookStoreServices.Entities.Models;
+﻿using eBookStoreServices.Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
+using eBookStoreServices.Services.Interfaces;
 
 namespace eBookStoreServices.Controllers
 {
+    [Authorize]
     public class CartController : ApiController
     {
-        private ICartRepository carts;
-        public CartController(ICartRepository _carts)
+        private ICartService _cartService;
+        public CartController(ICartService cartService)
         {
-            carts = _carts;
+            _cartService = cartService;
         }
 
-        [HttpGet]
+
         // GET api/<controller>/5
-        public IEnumerable<CartItemDetails> Get(int id)
+        [HttpGet]
+        public IEnumerable<CartItemDetails> Get()
         {
-            return carts.GetCartItems(id);
+            return _cartService.GetCartItems(User.Identity.GetUserId());
         }
 
         // POST api/<controller>
         [HttpPost]
-        public IHttpActionResult Post(CartItem item)
+        public IHttpActionResult Post(CartItem cartItem)
         {
-            bool result = carts.AddItemToCart(item);
+            CartItem item = new CartItem()
+            {
+                BookID = cartItem.BookID,
+                UserID = User.Identity.GetUserId()
+            };
+            bool result = _cartService.AddItemToCart(item);
             if (result)
             {
                 return Ok(item);
@@ -39,7 +47,7 @@ namespace eBookStoreServices.Controllers
         // PUT api/<controller>/5
         public IHttpActionResult Put(CartItem cartItem)
         {
-            bool result = carts.UpdateItemQuantity(cartItem);
+            bool result = _cartService.UpdateItemQuantity(cartItem);
             if (result)
             {
                 return Ok();
@@ -48,17 +56,16 @@ namespace eBookStoreServices.Controllers
             
         }
 
-        // DELETE api/<controller>/5
-        [HttpDelete]
-        [Route("api/cart/user/{userID}/book/{bookID}")]
-        public IHttpActionResult Delete(int userID, int bookID)
-        {
+        // DELETE api/<controller>/5            
+        public IHttpActionResult Delete(int id)
+        {          
+
             CartItem cartItem = new CartItem()
             {
-                UserID = userID,
-                BookID = bookID
+                UserID = User.Identity.GetUserId(),
+                BookID = id
             };
-            bool result = carts.DeleteItemFromCart(cartItem);
+            bool result = _cartService.DeleteItemFromCart(cartItem);
             if (result)
             {
                 return Ok();

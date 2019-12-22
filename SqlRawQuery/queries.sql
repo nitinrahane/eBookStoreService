@@ -1,4 +1,4 @@
-USE [E:\EROMONITOR\EBOOKSTORESERVICES\EBOOKSTORESERVICES\APP_DATA\EBOOKSTORE.MDF]
+USE [E:\EROMONITOR\EBOOKSTORESERVICES-GIT\EBOOKSTORESERVICES\EBOOKSTORESERVICES\APP_DATA\EBOOKSTORE.MDF]
 
 CREATE TABLE [dbo].[Books](
 
@@ -63,58 +63,58 @@ CREATE TABLE [dbo].[Books](
 	
 	
 
-CREATE TABLE [dbo].[Users](
+--CREATE TABLE [dbo].[Users](
 
-    [ID] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+--    [ID] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
 
-    [FullName] varchar(500),
+--    [FullName] varchar(500),
 
-    [Email] varchar(500),
+--    [Email] varchar(500),
 
-    [Password] varbinary(500) NULL ,
+--    [Password] varbinary(500) NULL ,
 
-    [Salt] varbinary(500) NULL,
-) 
+--    [Salt] varbinary(500) NULL,
+--) 
 
 --DROP TABLE dbo.[Users]
 
-INSERT INTO dbo.Users
-(
-    --ID - column value is auto-generated
-    FullName,
-    Email,
-    Password,
-    Salt
-)
-VALUES
-(
-    -- ID - int
-    'Nitin Rahane', -- FullName - varchar
-    'nitin.rahane11@gmail.com', -- Email - varchar
-    null, -- Password - varbinary
-    null -- Salt - varbinary
-)
+--INSERT INTO dbo.Users
+--(
+--    --ID - column value is auto-generated
+--    FullName,
+--    Email,
+--    Password,
+--    Salt
+--)
+--VALUES
+--(
+--    -- ID - int
+--    'Nitin Rahane', -- FullName - varchar
+--    'nitin.rahane11@gmail.com', -- Email - varchar
+--    null, -- Password - varbinary
+--    null -- Salt - varbinary
+--)
 
-INSERT INTO dbo.Users
-(
-    --ID - column value is auto-generated
-    FullName,
-    Email,
-    Password,
-    Salt
-)
-VALUES
-(
-    -- ID - int
-    'Vivek Rahane', -- FullName - varchar
-    'vivek.rahane11@gmail.com', -- Email - varchar
-    null, -- Password - varbinary
-    null -- Salt - varbinary
-)
+--INSERT INTO dbo.Users
+--(
+--    --ID - column value is auto-generated
+--    FullName,
+--    Email,
+--    Password,
+--    Salt
+--)
+--VALUES
+--(
+--    -- ID - int
+--    'Vivek Rahane', -- FullName - varchar
+--    'vivek.rahane11@gmail.com', -- Email - varchar
+--    null, -- Password - varbinary
+--    null -- Salt - varbinary
+--)
 
 CREATE TABLE Orders (
     ID int IDENTITY(1,1) NOT NULL PRIMARY KEY,   
-    UserID int NOT NULL FOREIGN KEY REFERENCES Users(ID),	
+    UserID nvarchar(128) NOT NULL FOREIGN KEY REFERENCES AspNetUsers(ID),	
 	PurchaseDate datetime NOT NULL DEFAULT getdate(),	
 	TotalPrice decimal NOT NULL,
 	OrderStatus varchar(50) NOT NULL DEFAULT 'Pending'
@@ -131,7 +131,7 @@ Quantity int NOT NULL DEFAULT 1,
 
   CREATE TABLE Cart (
     ID int IDENTITY(1,1) NOT NULL PRIMARY KEY,   
-    UserID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
+    UserID nvarchar(128) NOT NULL FOREIGN KEY REFERENCES AspNetUsers(ID),
 	BookID int NOT NULL FOREIGN KEY REFERENCES Books(ID),	
 	Quantity int NOT NULL DEFAULT 1,
 	AddedDate datetime NOT NULL DEFAULT getdate(),
@@ -192,7 +192,7 @@ VALUES
 )
 end 
 
-DECLARE @userId int  = 1;
+DECLARE @userId varchar(128)  = '';
 DECLARE @bookID int  = 1;
 DELETE FROM dbo.Cart
 WHERE userid = @userID AND bookId = @bookID

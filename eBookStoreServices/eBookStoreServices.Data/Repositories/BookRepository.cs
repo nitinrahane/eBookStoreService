@@ -7,20 +7,19 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Configuration;
 using Dapper;
+using eBookStoreServices.Config;
 
 namespace eBookStoreServices.Data.Repositories
 {
     public class BookRepository : IBookRepository
-    {
-        private string connectionString = ConfigurationManager.ConnectionStrings["eBookStore"].ConnectionString;
+    {      
 
         public bool AddNewBook(Book bookDetails)
         {
             try
             {
-                using (IDbConnection db = new SqlConnection(connectionString))
+                using (IDbConnection db = new SqlConnection(SiteConfigs.GetDBConnectionString()))
                 {
                     string sql = @"
                                         INSERT INTO dbo.Books
@@ -64,7 +63,7 @@ namespace eBookStoreServices.Data.Repositories
         {
             try
             {
-                using (IDbConnection db = new SqlConnection(connectionString))
+                using (IDbConnection db = new SqlConnection(SiteConfigs.GetDBConnectionString()))
                 {
                     string sql = @"DELETE FROM dbo.books 
                                    WHERE  dbo.books.id = @id ";
@@ -83,7 +82,7 @@ namespace eBookStoreServices.Data.Repositories
             try
             {
                 List<Book> books = new List<Book>();
-                using (IDbConnection db = new SqlConnection(connectionString))
+                using (IDbConnection db = new SqlConnection(SiteConfigs.GetDBConnectionString()))
                 {
                     string sql = @"
                                   SELECT * 
@@ -103,7 +102,7 @@ namespace eBookStoreServices.Data.Repositories
             try
             {
                 Book book = new Book();
-                using (IDbConnection db = new SqlConnection(connectionString))
+                using (IDbConnection db = new SqlConnection(SiteConfigs.GetDBConnectionString()))
                 {
                     string sql = @"
                                     SELECT * 
@@ -126,7 +125,7 @@ namespace eBookStoreServices.Data.Repositories
         {
             try
             {
-                using (IDbConnection db = new SqlConnection(connectionString))
+                using (IDbConnection db = new SqlConnection(SiteConfigs.GetDBConnectionString()))
                 {
                     string sql = @"
                                         UPDATE dbo.Books

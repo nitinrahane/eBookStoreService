@@ -5,18 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using eBookStoreServices.Data.Interfaces;
 using eBookStoreServices.Entities.Models;
-using System.Configuration;
 using Dapper;
 using System.Data;
 using System.Data.SqlClient;
+using eBookStoreServices.Config;
 
 namespace eBookStoreServices.Data.Repositories
 {
     public class OrderRepository : IOrderRepository
     {
-        private string connectionString = ConfigurationManager.ConnectionStrings["eBookStore"].ConnectionString;     
+        private string connectionString = SiteConfigs.GetDBConnectionString();
 
-        public List<OrderHistroy> GetAllOrdersForUser(int userId)
+        public List<OrderHistroy> GetAllOrdersForUser(string userId)
         {
             try
             {

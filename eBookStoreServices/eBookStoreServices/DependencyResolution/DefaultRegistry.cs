@@ -20,7 +20,9 @@ namespace eBookStoreServices.DependencyResolution {
     using eBookStoreServices.Data.Interfaces;
     using StructureMap.Configuration.DSL;
     using StructureMap.Graph;
-	
+    using eBookStoreServices.Services.Interfaces;
+    using eBookStoreServices.Services.Services;
+
     public class DefaultRegistry : Registry {
         #region Constructors and Destructors
 
@@ -31,6 +33,9 @@ namespace eBookStoreServices.DependencyResolution {
                     scan.WithDefaultConventions();
                 });
             //For<IExample>().Use<Example>();
+            For<IBookService>().Use<BookService>();
+            For<ICartService>().Use<CartService>();
+            For<IOrderService>().Use<OrderService>();
             For<IBookRepository>().Use<BookRepository>();
             For<ICartRepository>().Use<CartRepository>();
             For<IOrderRepository>().Use<OrderRepository>();
