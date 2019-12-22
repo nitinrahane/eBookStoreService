@@ -18,10 +18,25 @@
 
 namespace eBookStoreServices.DependencyResolution {
     using StructureMap;
-	
+    using System.Web;
+
     public static class IoC {
-        public static IContainer Initialize() {
-            return new Container(c => c.AddRegistry<DefaultRegistry>());
+        //public static IContainer Initialize() {
+        //    return new Container(c => c.AddRegistry<DefaultRegistry>());
+        //}
+
+        public static IContainer Initialize()
+        {
+            return new Container(c =>
+            {
+                c.AddRegistry<DefaultRegistry>();
+
+                // ADD THESE LINES
+                c.For<Microsoft.AspNet.Identity.IUserStore<Models.ApplicationUser>>().Use<Microsoft.AspNet.Identity.EntityFramework.UserStore<Models.ApplicationUser>>();
+                c.For<System.Data.Entity.DbContext>().Use(() => new Models.ApplicationDbContext());
+                c.For<Microsoft.Owin.Security.IAuthenticationManager>().Use(() => HttpContext.Current.GetOwinContext().Authentication);
+
+            });
         }
     }
 }

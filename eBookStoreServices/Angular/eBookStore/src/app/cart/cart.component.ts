@@ -19,13 +19,11 @@ export class CartComponent implements OnInit {
     );
   }
 
-  calPrice(qnt, price) {
+  calPrice(qnt: number, price: number) {
     return qnt * price;
   }
 
-  // shouldShowButton(){
-  //   return this.cartItemDetails && this.cartItemDetails.length > 0;
-  // }
+
   grandTotal() {
     let garndTotal: number = 0;
     if (this.cartItemDetails != null && this.cartItemDetails != undefined) {
@@ -38,8 +36,7 @@ export class CartComponent implements OnInit {
 
   removeFromCart(book) {
     var cartItem: any = {
-      BookID: book.ID,
-      UserID: 1
+      BookID: book.ID
     };
 
     this.ebookstoreserviceService.removeFromCart(cartItem).subscribe((data) => {
@@ -49,7 +46,7 @@ export class CartComponent implements OnInit {
   }
 
   placeOrder() {
-    this.ebookstoreserviceService.placeOrder(1, this.cartItemDetails).subscribe((data) => {
+    this.ebookstoreserviceService.placeOrder(this.cartItemDetails).subscribe((data) => {
       alert('Order Placed');
       this.cartItemDetails = [];
     });

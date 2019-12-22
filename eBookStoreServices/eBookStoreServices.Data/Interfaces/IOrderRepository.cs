@@ -10,6 +10,6 @@ namespace eBookStoreServices.Data.Interfaces
     public interface IOrderRepository
     {
         bool AddOrderDetails(Order orderDetails);
-        List<OrderHistroy> GetAllOrdersForUser(int userId);        
+        List<OrderHistroy> GetAllOrdersForUser(string userId);        
     }
 }

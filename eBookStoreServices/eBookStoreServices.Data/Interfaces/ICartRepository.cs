@@ -11,7 +11,7 @@ namespace eBookStoreServices.Data.Interfaces
     {
         bool AddItemToCart(CartItem item);
         bool UpdateItemQuantity(CartItem item);
-        List<CartItemDetails> GetCartItems(int userID);
+        List<CartItemDetails> GetCartItems(string userID);
         bool DeleteItemFromCart(CartItem item);
     }
 }

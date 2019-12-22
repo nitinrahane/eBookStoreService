@@ -18,8 +18,9 @@ export class AddnewbookComponent implements OnInit {
   }
 
   addBook(){
+    //Add new entry to db
     this.ebookstoreserviceService.addBook(this.bookDeatils).subscribe((data) => {
-      alert('Book added.');
+      alert('New book added to db.');
       this.bookDeatils = {};
     });
   }

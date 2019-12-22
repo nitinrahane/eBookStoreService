@@ -9,7 +9,7 @@ namespace eBookStoreServices.Entities.Models
     public class CartItem
     {
         public int ID { get; set; }
-        public int UserID { get; set; }
+        public string UserID { get; set; }
         public int BookID { get; set; }
         public int Quantity { get; set; }
         public DateTime AddedDate { get; set; }

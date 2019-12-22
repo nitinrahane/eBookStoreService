@@ -89,7 +89,7 @@ namespace eBookStoreServices.Data.Repositories
             }
         }
 
-        public List<CartItemDetails> GetCartItems(int userID)
+        public List<CartItemDetails> GetCartItems(string userID)
         {
             try
             {

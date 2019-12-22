@@ -22,27 +22,15 @@ export class BookstoreComponent implements OnInit {
     );
   }
 
-  editBookInfo(book:any){
-
-  }
-
   addToCart(book:any){
     var cartItem :any = {
-      BookID :book.ID,
-      UserID : 1
+      BookID :book.ID
     };
 
     this.ebookstoreserviceService.addTocart(cartItem).subscribe((data)=>{
       alert('Book added to the cart.')
     });
-  }
+  } 
 
-  deleteBookInfo(book:any){
-
-  }
-
-  placeOrder(){
-
-  }
 }
 

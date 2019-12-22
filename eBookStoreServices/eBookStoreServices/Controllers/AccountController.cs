@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using eBookStoreServices.Models;
 using eBookStoreServices.Providers;
 using eBookStoreServices.Results;
+using StructureMap;
 
 namespace eBookStoreServices.Controllers
 {
@@ -26,6 +27,7 @@ namespace eBookStoreServices.Controllers
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
 
+        [DefaultConstructor]
         public AccountController()
         {
         }
