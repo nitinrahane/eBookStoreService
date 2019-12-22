@@ -1,6 +1,7 @@
 ﻿using eBookStoreServices.Controllers;
 using eBookStoreServices.Entities.Models;
 using eBookStoreServices.Services.Interfaces;
+using eBookStoreServices.TestHelpers.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
@@ -19,72 +20,63 @@ namespace eBookStoreServices.UnitTest
         [TestMethod]
         public void GetCartItems_ShouldReturnCartItems()
         {
-            //MOQ testing
             //Arrange
-            var mockRepositoryClass = new Mock<ICartService>();
+            var mock = new Mock<ICartService>();
 
-            mockRepositoryClass.Setup(x => x.GetCartItems("xyz")).Returns(new List<Entities.Models.CartItemDetails>() {
-                new Entities.Models.CartItemDetails() { ID = 1 }
-            });
+            mock.Setup(x => x.GetCartItems(It.IsAny<string>())).Returns(DataInitializer.GetCartItems());
 
-            var cartController = new CartController(mockRepositoryClass.Object);
-
+            var cartController = new CartController(mock.Object);
             //Act
-            var result = cartController.Get().First();
-            
+            var result = cartController.Get();
             //Assert
-            Assert.AreEqual(1, result.ID);
+            Assert.AreEqual(1, result.FirstOrDefault().ID);
         }
 
 
-        //[TestMethod]
-        //public void PostCartItem_ShouldReturnItem()
-        //{
-        //    //Arrange
-        //    var mockRepositoryClass = new Mock<ICartRepository>();
-        //    mockRepositoryClass.Setup(x => x.AddItemToCart(new CartItem() { BookID = 3, UserID = 1 })).Returns(true);
-        //    var cartController = new CartController(mockRepositoryClass.Object);
+        [TestMethod]
+        public void PostCartItem_ShouldReturnItem()
+        {
+            //Arrange
+            var mock = new Mock<ICartService>();
+            mock.Setup(x => x.AddItemToCart(It.IsAny<CartItem>())).Returns(true);
+            var cartController = new CartController(mock.Object);
+            var result = cartController.Post(new CartItem()
+            {
+                BookID = DataInitializer.GetCartItems().FirstOrDefault().ID
+            });
+            var resultCartItem = result as OkNegotiatedContentResult<CartItem>;
+            Assert.IsNotNull(resultCartItem);
+            Assert.AreEqual(1, resultCartItem.Content.BookID);
+        }
 
+        [TestMethod]
+        public void Put_ShouldRetuemItem()
+        {
+            // Arrange
+            var mock = new Mock<ICartService>();
 
-        //    var result = cartController.Post(new Entities.Models.CartItem() { BookID = 3, UserID = 1 });
-        //    var resultCartItem = result as NegotiatedContentResult<CartItem>;
-        //    Assert.IsNotNull(resultCartItem);
-        //    Assert.AreEqual(3, resultCartItem.Content.BookID);
-        //}
+            mock.Setup(x => x.UpdateItemQuantity(It.IsAny<CartItem>())).Returns(true);
+            var cartController = new CartController(mock.Object);
+            // Act
+            IHttpActionResult actionResult = cartController.Put(new CartItem() { BookID = 3, Quantity = 4, UserID = "" });
 
-        //[TestMethod]
-        //public void Put_ShouldRetuemItem()
-        //{
-        //    // Arrange
-        //    var mockRepositoryClass = new Mock<ICartRepository>();
+            // Assert          
+            Assert.IsInstanceOfType(actionResult, typeof(OkResult));
+        }
 
-        //     mockRepositoryClass.Setup(x => x.UpdateItemQuantity(new CartItem() { BookID = 3, UserID = 1 }));
-        //    var cartController = new CartController(mockRepositoryClass.Object);
-        //    // Act
-        //    IHttpActionResult actionResult = cartController.Put(new CartItem() { BookID = 3, Quantity = 4, UserID = 1});
-        //    var result = actionResult as NegotiatedContentResult<CartItem>;
+        [TestMethod]
+        public void Delete_ReturnsOk()
+        {
+            // Arrange
+            var mock = new Mock<ICartService>();
+            mock.Setup(x => x.DeleteItemFromCart(It.IsAny<CartItem>())).Returns(true);
+            var controller = new CartController(mock.Object);
 
-        //    // Assert
-        //    Assert.IsNotNull(result);           
-        //    Assert.IsNotNull(result.Content);
-        //    Assert.AreEqual(3, result.Content.BookID);
-        //}
+            // Act
+            IHttpActionResult actionResult = controller.Delete(1);
 
-        //[TestMethod]
-        //public void Delete_ReturnsOk()
-        //{
-        //    // Arrange
-        //    var mockRepository = new Mock<ICartRepository>();
-
-        //    mockRepository.Setup(x => x.DeleteItemFromCart(new CartItem() { BookID = 3, UserID = 1 })).Returns(true);
-
-        //    var controller = new CartController(mockRepository.Object);
-            
-        //    // Act
-        //    IHttpActionResult actionResult = controller.Delete(1, 3);
-
-        //    // Assert
-        //    Assert.IsInstanceOfType(actionResult, typeof(OkResult));
-        //}
+            // Assert
+            Assert.IsInstanceOfType(actionResult, typeof(OkResult));
+        }
     }
 }

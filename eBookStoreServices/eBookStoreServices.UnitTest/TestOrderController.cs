@@ -1,7 +1,7 @@
 ﻿using eBookStoreServices.Controllers;
-using eBookStoreServices.Data.Interfaces;
-using eBookStoreServices.Data.Repositories;
-using eBookStoreServices.Services.Services;
+using eBookStoreServices.Entities.Models;
+using eBookStoreServices.Services.Interfaces;
+using eBookStoreServices.TestHelpers.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
@@ -19,13 +19,33 @@ namespace eBookStoreServices.UnitTest
     {
         [TestMethod]
         public void GetOrders_ShouldReturnOrders()
-        { //Arrange
-
-            var orderController = new OrderController(new OrderService(new OrderRepository()), new CartService(new CartRepository()));
+        {
+            //Arrange
+            var mockOrderService = new Mock<IOrderService>();
+            var mockCartService = new Mock<ICartService>();
+            mockOrderService.Setup(x => x.GetAllOrdersForUser(It.IsAny<string>())).Returns(DataInitializer.GetOrderHistory());
+                       
+            var orderController = new OrderController(mockOrderService.Object, mockCartService.Object);
             //Act
             var result = orderController.Get();
             //Assert
-            Assert.IsTrue(result.Count() > 0, "books are presents");
+            Assert.IsTrue(result.Count() > 0, "Order Tested.");
+
+        }
+
+        [TestMethod]
+        public void PostOrders_ShouldReturnOK()
+        {
+            //Arrange
+            var mockOrderService = new Mock<IOrderService>();
+            var mockCartService = new Mock<ICartService>();
+            mockOrderService.Setup(x => x.AddOrderDetails(It.IsAny<Order>())).Returns(true);
+
+            var orderController = new OrderController(mockOrderService.Object, mockCartService.Object);
+            //Act
+            var result = orderController.Post(DataInitializer.GetCartItems());
+            //Assert
+            Assert.IsInstanceOfType(result, typeof(OkResult));
 
         }
     }

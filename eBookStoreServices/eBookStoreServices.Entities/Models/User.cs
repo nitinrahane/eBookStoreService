@@ -11,7 +11,6 @@ namespace eBookStoreServices.Entities.Models
         public string ID { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
-        public byte[] Password { get; set; }
-        public byte[] Salt { get; set; }
+        public string Password { get; set; }        
     }
 }

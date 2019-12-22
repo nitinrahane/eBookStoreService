@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eBookStoreServices.Config",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eBookStoreServices.Services", "eBookStoreServices.Services\eBookStoreServices.Services.csproj", "{AD5BC7F7-6550-4A34-A4FF-02766F112930}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eBookStoreServices.TestHelpers", "eBookStoreServices.TestHelpers\eBookStoreServices.TestHelpers.csproj", "{787DE28A-E9B5-4712-9999-6A723AE19FF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eBookStoreServices.IntegrationTest", "eBookStoreService.IntegrationTest\eBookStoreServices.IntegrationTest.csproj", "{57F13F86-7F6E-4AED-9B3A-82D995727B7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{AD5BC7F7-6550-4A34-A4FF-02766F112930}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD5BC7F7-6550-4A34-A4FF-02766F112930}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD5BC7F7-6550-4A34-A4FF-02766F112930}.Release|Any CPU.Build.0 = Release|Any CPU
+		{787DE28A-E9B5-4712-9999-6A723AE19FF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{787DE28A-E9B5-4712-9999-6A723AE19FF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{787DE28A-E9B5-4712-9999-6A723AE19FF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{787DE28A-E9B5-4712-9999-6A723AE19FF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57F13F86-7F6E-4AED-9B3A-82D995727B7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57F13F86-7F6E-4AED-9B3A-82D995727B7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57F13F86-7F6E-4AED-9B3A-82D995727B7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57F13F86-7F6E-4AED-9B3A-82D995727B7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

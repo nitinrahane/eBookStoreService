@@ -45,6 +45,7 @@
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\OrderHistory.cs" />
     <Compile Include="Models\Order_Item.cs" />
+    <Compile Include="Models\TokenResponce.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
