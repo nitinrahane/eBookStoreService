@@ -11,7 +11,7 @@ export class OrdersComponent implements OnInit {
   constructor(private ebookstoreserviceService: EbookstoreserviceService) { }
 
   ngOnInit() {
-    this.ebookstoreserviceService.get_OrderHistory(1).subscribe(
+    this.ebookstoreserviceService.get_OrderHistory().subscribe(
       (data: any[]) => {
         console.log(data);
         this.orderHistory = data;
