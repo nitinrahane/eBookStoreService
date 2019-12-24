@@ -1,10 +1,5 @@
-﻿using eBookStoreServices.Data.Interfaces;
-using eBookStoreServices.Entities.Models;
-using System;
+﻿using eBookStoreServices.Entities.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using eBookStoreServices.Services.Interfaces;
@@ -24,6 +19,8 @@ namespace eBookStoreServices.Controllers
         }
 
         // GET api/<controller>
+        [HttpGet]
+        [Route("api/order")]
         public IEnumerable<OrderHistroy> Get()
         {
             var userID = User.Identity.GetUserId();

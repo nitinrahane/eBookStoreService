@@ -89,6 +89,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BookControllerIntegrationTests.cs" />
+    <Compile Include="CartControllerIntegrationTests.cs" />
+    <Compile Include="IntegrationTests.cs" />
+    <Compile Include="OrderControllerIntegrationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -118,7 +118,7 @@ namespace eBookStoreServices.TestHelpers.Helpers
 
             cartDetails.Add(new CartItemDetails()
             {
-                ID = 2,
+                ID = 3,
                 Title = "Test 1",
                 Author = "Test 1",
                 Description = "Testing 1",
