@@ -1,35 +1,42 @@
-import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { AuthService } from './auth/auth.service';
+import { DebugElement } from '@angular/core';
+import { AppModule } from './app.module';
+import { User } from './auth/user.model';
+import { BehaviorSubject } from 'rxjs';
 
 describe('AppComponent', () => {
+ 
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let el: DebugElement;
+  let authService: any;
+   let userInfo:User = new User('', '', '', new Date());
+   const userMock = new BehaviorSubject<User>(userInfo);
+
+
   beforeEach(async(() => {
+    let authServiceSpy = jasmine.createSpyObj('AuthService', ['autoLogin']);
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        AppModule
       ],
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
+      providers: [
+        { provide: AuthService, useValue: authServiceSpy }
+      ]
+    }).compileComponents()
+      .then(() => {
+        fixture = TestBed.createComponent(AppComponent);
+        component = fixture.componentInstance;
+        el = fixture.debugElement;
+        authService = TestBed.get(AuthService);
+        authService.user = userMock.asObservable();
+        fixture.detectChanges();
+      });
   }));
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'eBookStore'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('eBookStore');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('eBookStore app is running!');
+  it('should create the app', () => {       
+    expect(component).toBeTruthy();
   });
 });

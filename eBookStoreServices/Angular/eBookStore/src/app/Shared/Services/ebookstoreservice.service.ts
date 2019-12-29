@@ -12,9 +12,7 @@ export class EbookstoreserviceService {
 
   baseUrl: string = "https://localhost:44371/api/";
 
-  constructor(private httpClient: HttpClient,
-    private messageService: MessageService,
-    private authService: AuthService) { }
+  constructor(private httpClient: HttpClient) { }
 
   get_bookDetails() {
     return this.httpClient.get(this.baseUrl + 'books').pipe(
@@ -53,19 +51,10 @@ export class EbookstoreserviceService {
       catchError(this.handleError<any[]>('Get Order history', [])));
   }
 
-  private log(message: string) {
-    this.messageService.add(`ApiService: ${message}`);
-  }
 
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-  
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-  
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-  
+      console.error(error); 
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };

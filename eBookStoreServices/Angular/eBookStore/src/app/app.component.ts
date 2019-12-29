@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { EbookstoreserviceService } from './Shared/Services/ebookstoreservice.service';
 import { AuthService } from './auth/auth.service';
 @Component({
   selector: 'app-root',
@@ -8,7 +6,6 @@ import { AuthService } from './auth/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'eBookStore';
   constructor(private authService: AuthService) { }
 
   ngOnInit() {

@@ -7,10 +7,10 @@ import { throwError, BehaviorSubject } from 'rxjs';
 import { User } from './user.model';
 
 
-export interface ResiterResponseData {
-  Message: string;
-  ModelState: any;
-}
+// export interface ResiterResponseData {
+//   Message: string;
+//   ModelState: any;
+// }
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

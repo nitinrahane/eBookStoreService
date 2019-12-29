@@ -13,7 +13,7 @@ export class OrdersComponent implements OnInit {
   ngOnInit() {
     this.ebookstoreserviceService.get_OrderHistory().subscribe(
       (data: any[]) => {
-        console.log(data);
+      //  console.log(data);
         this.orderHistory = data;
       }
     );

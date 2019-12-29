@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EbookstoreserviceService } from '../Shared/Services/ebookstoreservice.service';
 import { CartItem } from '../Shared/Models/Cart';
+import { Book } from '../Shared/Models/Book';
 
 @Component({
   selector: 'app-bookstore',
@@ -15,8 +16,8 @@ export class BookstoreComponent implements OnInit {
 
   ngOnInit() {
     this.ebookstoreserviceService.get_bookDetails().subscribe(
-      (data:any[])=>{
-       // console.log(data);
+      (data:Book[])=>{
+      //  console.log(data);
         this.bookDetails = data;
       }
     );

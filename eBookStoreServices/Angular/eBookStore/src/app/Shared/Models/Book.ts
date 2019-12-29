@@ -4,7 +4,7 @@ export interface Book{
     Author:string,
     Description:string,
     Publisher:string,
-    PublishedYear:Date,
+    PublishedYear:number,
     Price:number
 }
 

@@ -2,15 +2,15 @@ import { Book } from './Book';
 
 export interface CartItemDetails extends  Book {
       Quantity:number,
-      AddedDate:Date 
+      AddedDate:string 
 }
 
-export interface CartItem {
-      ID:number,
+export interface CartItem  {
+      ID:number,      
       UserID:number,
       BookID:number,
       Quantity:number,
-      AddedDate:Date,
+      AddedDate:string,
       CartStaus:CartStaus
 }
 

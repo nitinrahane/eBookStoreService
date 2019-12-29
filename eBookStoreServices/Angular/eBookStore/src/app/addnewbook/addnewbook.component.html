@@ -3,46 +3,45 @@
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
             <div>
-                <form>
+                <form #addNewBookForm="ngForm" (ngSubmit)="addBook()">
                     <div class="form-group">
 
                         <label for="title">Title</label>
                         <input [(ngModel)]="bookDeatils.Title" type="text" name="title" class="form-control" id="title"
-                            aria-describedby="nameHelp" placeholder="Enter Title">
+                            aria-describedby="nameHelp" placeholder="Enter Title" required>
                         <small id="nameHelp" class="form-text text-muted">Enter Title</small>
 
                         <label for="Author">Author</label>
                         <input [(ngModel)]="bookDeatils.Author" type="text" name="Author" class="form-control"
-                            id="Author" aria-describedby="nameHelp" placeholder="Enter Author">
+                            id="Author" aria-describedby="nameHelp" placeholder="Enter Author" required>
                         <small id="nameHelp" class="form-text text-muted">Enter Author</small>
 
 
                         <label for="description">Description</label>
                         <textarea [(ngModel)]="bookDeatils.Description" name="description" class="form-control"
-                            id="description" aria-describedby="descHelp">
+                            id="description" aria-describedby="descHelp" required>
                         </textarea>
                         <small id="descHelp" class="form-text text-muted">Enter book description</small>
 
 
                         <label for="Publisher">Publisher</label>
                         <input [(ngModel)]="bookDeatils.Publisher" type="text" name="Publisher" class="form-control"
-                            id="Publisher" aria-describedby="nameHelp" placeholder="Enter Publisher">
+                            id="Publisher" aria-describedby="nameHelp" placeholder="Enter Publisher" required>
                         <small id="nameHelp" class="form-text text-muted">Enter Publisher</small>
 
                         <label for="PublishedYear">Published Year</label>
                         <input [(ngModel)]="bookDeatils.PublishedYear" type="text" name="PublishedYear"
                             class="form-control" id="PublishedYear" aria-describedby="nameHelp"
-                            placeholder="Enter Published Year">
+                            placeholder="Enter Published Year" required>
                         <small id="nameHelp" class="form-text text-muted">Enter Published Year</small>
 
                         <label for="Price">Price</label>
                         <input [(ngModel)]="bookDeatils.Price" type="text" name="Price" class="form-control" id="Price"
-                            aria-describedby="nameHelp" placeholder="Enter Price">
-                        <small id="nameHelp" class="form-text text-muted">Enter Price</small>
-                        
+                            aria-describedby="nameHelp" placeholder="Enter Price" required>
+                        <small id="nameHelp" class="form-text text-muted">Enter Price</small>                       
                     </div>
-                </form>
-                <button class="btn btn-primary" (click)="addBook()">Add Book</button>
+                    <button class="btn btn-primary" type="submit"  [disabled]="!addNewBookForm.valid">Add Book</button>
+                </form>                
             </div>
         </div>
     </div>
