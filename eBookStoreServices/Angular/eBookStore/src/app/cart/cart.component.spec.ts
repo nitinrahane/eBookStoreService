@@ -3,9 +3,7 @@ import { of } from 'rxjs';
 
 import { CartComponent } from './cart.component';
 import { EbookstoreserviceService } from '../Shared/Services/ebookstoreservice.service';
-import { HttpClientModule } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { BrowserModule, By } from '@angular/platform-browser';
+import { By } from '@angular/platform-browser';
 import { AppModule } from '../app.module';
 import { DebugElement } from '@angular/core';
 import { cartData } from '../TestHelpers/TestData';
@@ -17,8 +15,8 @@ describe('CartComponent', () => {
   let bookService: any;
 
   beforeEach(async(() => {
-    let bookServiceSpy = jasmine.createSpyObj('EbookstoreserviceService', ['get_CartDetails', 'removeFromCart','placeOrder']);
-    TestBed.configureTestingModule({     
+    let bookServiceSpy = jasmine.createSpyObj('EbookstoreserviceService', ['get_CartDetails', 'removeFromCart', 'placeOrder']);
+    TestBed.configureTestingModule({
       imports: [
         AppModule
       ],
@@ -26,16 +24,16 @@ describe('CartComponent', () => {
         { provide: EbookstoreserviceService, useValue: bookServiceSpy }
       ]
     })
-    .compileComponents()
-    .then(()=>{
-      fixture = TestBed.createComponent(CartComponent);
-      component = fixture.componentInstance;
-      el = fixture.debugElement;
-      bookService = TestBed.get(EbookstoreserviceService);
-      bookService.get_CartDetails.and.returnValue(of(cartData));
-      component.ngOnInit();
-      fixture.detectChanges();
-    });
+      .compileComponents()
+      .then(() => {
+        fixture = TestBed.createComponent(CartComponent);
+        component = fixture.componentInstance;
+        el = fixture.debugElement;
+        bookService = TestBed.get(EbookstoreserviceService);
+        bookService.get_CartDetails.and.returnValue(of(cartData));
+        component.ngOnInit();
+        fixture.detectChanges();
+      });
   }));
 
   it('Should create component', () => {
